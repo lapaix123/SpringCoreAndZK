@@ -1,0 +1,110 @@
+<zk>
+    <style>
+        /* Custom CSS for button styling */
+        .green-button {
+        background-color: #28a745;
+        color: white;
+        }
+
+        /* Custom CSS for delete button */
+        .red-button {
+        background-color: #dc3545;
+        color: white;
+        }
+
+        /* Custom CSS for table styling */
+        .green-table {
+        background-color: lightgreen;
+        }
+    </style>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm') @init('rw.gov.minecofine.viewModel.StudentViewModel')">
+
+        <hlayout>
+            <vlayout>
+                <label value="Registration Number:"/>
+                <textbox value="@bind(vm.student.registrationNumber)"/>
+
+                <label value="First Name:"/>
+                <textbox value="@bind(vm.student.firstName)"/>
+
+                <label value="Last Name:"/>
+                <textbox value="@bind(vm.student.lastName)"/>
+
+                <label value="Gender:"/>
+                <radiogroup selectedItem="@bind(vm.student.gender)">
+                    <radio label="Male" value="Male"/>
+                    <radio label="Female" value="Female"/>
+                </radiogroup>
+
+                <label value="Date of Birth:"/>
+                <datebox value="@bind(vm.student.dateOfBirth)"/>
+
+                <label value="Address:"/>
+                <textbox value="@bind(vm.student.address)"/>
+
+                <label value="Email:"/>
+                <textbox value="@bind(vm.student.email)"/>
+
+                <label value="Phone Number:"/>
+                <textbox value="@bind(vm.student.phoneNumber)"/>
+
+                <hbox>
+                    <button label="Save" sclass="green-button" onClick="@command('addStudent')"/>
+                    <button label="Update" onClick="@command('updateStudent')"/>
+                    <button label="Delete" onClick="@command('confirmDelete')" sclass="red-button" />
+                </hbox>
+            </vlayout>
+
+            <listbox model="@load(vm.students)" selectedItem="@bind(vm.student)" sclass="my-data green-table" emptyMessage="No user found">
+            <listhead>
+                    <listheader label="ID"/>
+                    <listheader label="RegNo"/>
+                    <listheader label="First Name"/>
+                    <listheader label="Last Name"/>
+                    <listheader label="Gender"/>
+                    <listheader label="Date of Birth"/>
+                    <listheader label="Reg Date"/>
+                    <listheader label="Address"/>
+                    <listheader label="Email"/>
+                    <listheader label="Phone"/>
+                </listhead>
+                <template name="model">
+                    <listitem sclass="list-item">
+                        <listcell>
+                            <label value="@load(each.id)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.registrationNumber)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.firstName)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.lastName)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.gender)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.dateOfBirth)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.registrationDate)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.address)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.email)" />
+                        </listcell>
+                        <listcell>
+                            <label value="@load(each.phoneNumber)" />
+                        </listcell>
+                    </listitem>
+                </template>
+            </listbox>
+        </hlayout>
+
+    </window>
+</zk>
